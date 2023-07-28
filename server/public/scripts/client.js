@@ -1,7 +1,9 @@
 console.log('hello from client.js');
 
 // getCalculation function
-
+function getCalculation(event) {
+   
+}
 
 // all the math stuff function will go here
 
