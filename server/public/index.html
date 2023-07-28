@@ -7,10 +7,46 @@
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
+    <!--header-->
     <h1>Calculator</h1>
-<form onsubmit="calculation(event)">    </form>
+    <br>
+    <br>
+<div id="formDiv">
+    <form onsubmit="calculation(event)">   
+        <!--First Number Form-->
+        <input type="number" id="firstNumber">
+        <!--Addition Button-->
+        <button id="additionButton">+</button>
+        <!--Subtraction Button-->
+        <button id="subtractionButton">-</button>
+        <!--Multiplication Button-->
+        <button id="multiplicationButton">X</button>
+        <!--Division Button-->
+        <button id="divisionButton">/</button>
+        <!--Second Number-->
+        <input type="number" id="secondNumber">
+        <!--Equals (submit everything)-->
+        <button id="submitButton" onclick="calculation(event)">=</button>
+        <!--Clear button-->
+        <button id="clearButton" onclick="clearForm(event)">C</button>
+    </form>
+</div>
 
+<br>
+<br>
 
+<!--Output Div-->
+<div id="outputDiv"> 
+    <h3>output</h3>
+</div>
+<br>
+<br>
+<!--Calculation log-->
+<div id="listDiv">
+    <ul id="list">
+       
+    </ul>
+</div>
 
 
 
