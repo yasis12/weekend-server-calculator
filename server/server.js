@@ -1,15 +1,25 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 5001;
-const calculatorRouter = require('./routes/calculator.router');
-const exp = require('constants');
-
+const PORT = 5001;
 app.use(express.json());
 
-app.use('/calculator', calculatorRouter);
+let calculatorResults = [];
 
 app.use(express.static('server/public'));
 
-app.listen(port, () => {
-    console.log(`listening on port: ${port}`);
+app.listen(PORT, () => {
+    console.log('listening on port', PORT)
 });
+
+app.get('/calculator', function(req, res){
+    console.log('Request for /calculator was made');
+    res.send(calculatorResults);
+});
+
+// app.post('/calculator', (req, res) =>{
+//     console.log('POST request for /calculator');
+//     console.log(req.body);
+//     let calculationToAdd = req.body;
+//     calculatorResults.push(calculationToAdd);
+//     res.sendStatus(201);
+// });

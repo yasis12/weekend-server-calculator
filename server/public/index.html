@@ -12,7 +12,7 @@
     <br>
     <br>
 <div id="formDiv">
-    <form onsubmit="calculation(event)">   
+    <form onsubmit="getCalculation(event)">   
         <!--First Number Form-->
         <input type="number" id="firstNumber">
         <!--Addition Button-->
@@ -26,10 +26,11 @@
         <!--Second Number-->
         <input type="number" id="secondNumber">
         <!--Equals (submit everything)-->
-        <button id="submitButton" onclick="getCalculation(event)">=</button>
+        <button type="submit" id="submitButton">=</button>
         <!--Clear button-->
-        <button id="clearButton" onclick="clearForm(event)">C</button>
+        <button id="clearButton">C</button>
     </form>
+    
 </div>
 
 <br>
