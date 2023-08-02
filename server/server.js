@@ -34,7 +34,6 @@ app.post('/calculator', (req, res) => {
         break;
       case '/':
         result = firstNumber / secondNumber;
-        break;
     };
 
     console.log('result of calculation', result);

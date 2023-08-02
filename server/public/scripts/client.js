@@ -1,5 +1,8 @@
 console.log('hello from client.js');
 
+
+
+
 function getCalculation() {
     console.log('in getCalculation');
 
@@ -25,7 +28,7 @@ getCalculation()
 let selectedOperation = '';
 
 function operator(event){
-    console.log('opperation', event.target.innerHTML);
+    console.log('opperation is:', event.target.innerHTML);
     selectedOperation = event.target.innerHTML;
 }
 
@@ -36,7 +39,10 @@ function submitForm(event) {
     let secondNumber = document.querySelector('#secondNumber').value;
     const list = document.querySelector('#list');
 
-   operator(event);
+    function operator(event){
+        console.log('opperation is:', event.target.innerHTML);
+        selectedOperation = event.target.innerHTML;
+    }
 
     let mathToAdd = {
         firstNumber: firstNumber,
@@ -48,8 +54,8 @@ function submitForm(event) {
 
     axios.post('/calculator', mathToAdd).then((response) => {
         console.log(response);
-        document.querySelector('#firstNumber') = '';
-        document.querySelector('#secondNumber') = '';
+        document.querySelector('#firstNumber').value = '';
+        document.querySelector('#secondNumber').value = '';
 
         getCalculation();
 

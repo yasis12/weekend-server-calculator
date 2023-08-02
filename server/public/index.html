@@ -12,25 +12,22 @@
     <br>
     <br>
 <div id="formDiv">
-    <form onSubmit="submitForm(event)">   
         <!--First Number Form-->
         <input type="number" id="firstNumber">
         <!--Addition Button-->
-        <button id="additionButton" onclick="operator()" value="+">+</button>
+        <button id="additionButton" onclick="operator(event)" value="+">+</button>
         <!--Subtraction Button-->
-        <button id="subtractionButton" onclick="operator()" value="-">-</button>
+        <button id="subtractionButton" onclick="operator(event)" value="-">-</button>
         <!--Multiplication Button-->
-        <button id="multiplicationButton" onclick="operator()" value="X">X</button>
+        <button id="multiplicationButton" onclick="operator(event)" value="X">X</button>
         <!--Division Button-->
-        <button id="divisionButton" onclick="operator()" value="/">/</button>
+        <button id="divisionButton" onclick="operator(event)" value="/">/</button>
         <!--Second Number-->
         <input type="number" id="secondNumber">
         <!--Equals (submit everything)-->
-        <button type="submit" id="submitButton">=</button>
+        <button type="submit" id="submitButton" onclick="submitForm(event)">=</button>
         <!--Clear button-->
         <button id="clearButton">C</button>
-    </form>
-    
 </div>
 
 <br>
