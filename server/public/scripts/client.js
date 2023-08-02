@@ -35,6 +35,8 @@ function submitForm(event) {
     let secondNumber = document.querySelector('#secondNumber').value;
     const list = document.querySelector('#list');
 
+   operator();
+
     let mathToAdd = {
         firstNumber: firstNumber,
         secondNumber: secondNumber,

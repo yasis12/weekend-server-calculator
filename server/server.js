@@ -20,10 +20,10 @@ app.post('/calculator', (req, res) => {
     let firstNumber = req.body.firstNumber;
     let secondNumber = req.body.secondNumber;
     let selectedOperation = req.body.selectedOperation;
-    let result;
+    let result = 0;
   
     // Perform the calculation based on the chosen operator
-    switch (operator) {
+    switch (selectedOperation) {
       case '+':
         result = firstNumber + secondNumber;
         break;
@@ -36,6 +36,8 @@ app.post('/calculator', (req, res) => {
       case '/':
         result = firstNumber / secondNumber;
         break;
+        default:
+            alert("no good");
     };
   
     // Store the calculation in the calculatorResults array
