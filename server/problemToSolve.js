@@ -1,7 +1,8 @@
 let problemToSolve = [
     {firstNumber: '',
     selectedOperation: '',
-    secondNumber: ''
+    secondNumber: '',
+    result: ''
     }
   ];
   
