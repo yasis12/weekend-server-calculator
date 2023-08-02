@@ -1,9 +1,8 @@
 const express = require('express');
 const app = express();
 const PORT = 5001;
+const problemToSolve = require('./problemToSolve');
 app.use(express.json());
-
-let calculatorResults = [];
 
 app.use(express.static('server/public'));
 
@@ -13,7 +12,7 @@ app.listen(PORT, () => {
 
 app.get('/calculator', function(req, res){
     console.log('Request for /calculator was made');
-    res.send(calculatorResults);
+    res.send(problemToSolve);
 });
 
 app.post('/calculator', (req, res) => {
@@ -36,11 +35,18 @@ app.post('/calculator', (req, res) => {
       case '/':
         result = firstNumber / secondNumber;
         break;
-        default:
-            alert("no good");
     };
-  
-    // Store the calculation in the calculatorResults array
-    calculatorResults.push(`${firstNumber} ${operator} ${secondNumber} = ${result}`);
 
+    console.log('result of calculation', result);
+
+    let problemToAdd = {
+        firstNumber: firstNumber,
+        selectedOperation: selectedOperation,
+        secondNumber: secondNumber,
+        result: result
+    }
+
+    // Store the calculation in the calculatorResults array
+    problemToSolve.push(problemToAdd);
+    res.sendStatus(201);
   });

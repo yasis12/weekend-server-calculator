@@ -10,7 +10,7 @@ function getCalculation() {
         outputDiv.innerHTML = '';
         for (const calculation of calculatorResults) {
             outputDiv.innerHTML += `
-            <li>${calculation.firstNumber} ${calculation.operator} ${calculation.secondNumber} = ${result}</li>
+            <li>${calculation.firstNumber} ${calculation.operator} ${calculation.secondNumber}</li>
             `
           }
     }).catch((error) => {
@@ -25,6 +25,7 @@ getCalculation()
 let selectedOperation = '';
 
 function operator(event){
+    console.log('opperation', event.target.innerHTML);
     selectedOperation = event.target.innerHTML;
 }
 
@@ -35,7 +36,7 @@ function submitForm(event) {
     let secondNumber = document.querySelector('#secondNumber').value;
     const list = document.querySelector('#list');
 
-   operator();
+   operator(event);
 
     let mathToAdd = {
         firstNumber: firstNumber,
