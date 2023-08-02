@@ -1,74 +1,60 @@
 console.log('hello from client.js');
 
-function getCalculation(event) {
+function getCalculation() {
+    console.log('in getCalculation');
+
     axios.get('/calculator').then((response) => {
         console.log('Response from inside getCalculation',response);
-        let dataFromServer = response.data;
+        let calculatorResults = response.data;
         let outputDiv = document.querySelector('#outputDiv');
-        outoutDiv.innerHTML = '';
-
-
-        outputDiv.innerHTML = `<h3>13</h3>`;
+        outputDiv.innerHTML = '';
+        for (const calculation of calculatorResults) {
+            outputDiv.innerHTML += `
+            <li>${calculation.firstNumber} ${calculation.operator} ${calculation.secondNumber} = ${result}</li>
+            `
+          }
     }).catch((error) => {
         console.log('Error Within getCalculation:',error);
         alert('Something Exploded');
     });
 }
 
-// let selectedOperation = null;
-
-// function selectOperation(operation) {
-//     selectedOperation = operation;
-// };
-
-// function performCalculation(firstNumber, secondNumber) {
-//     let result = 0;
-//     switch (selectedOperation) {
-//     case '+': result = firstNumber + secondNumber;
-//     break;
-//     case '-': result = firstNumber - secondNumber;
-//     break;
-//     case 'X': result = firstNumber * secondNumber;
-//     break;
-//     case '/': result = firstNumber / secondNumber;
-//     break;
-//     default: result = null;
-//     }
-//     return result;
-// }
+getCalculation()
 
 
+let selectedOperation = '';
 
-// function getCalculation(event) {
-//     event.preventDefault();
-//     // get request
-//    axios.get('/calculator').then((response) => {
-//    console.log(response);
-//    let claculatorFromServer = response.data;
-// let outputDiv = document.querySelector('#outputDiv');
-// outputDiv.innerHTML = '';
+function operator(event){
+    selectedOperation = event.target.innerHTML;
+}
 
-// // code that actually does the calculation - I think it goes here
-// let firstNumber = document.querySelector('#firstNumber');
-// let secondNumber = document.querySelector('#secondNumber');
 
-// let result = performCalculation(firstNumber, secondNumber);
+function submitForm(event) {
+    event.preventDefault();
+    let firstNumber = document.querySelector('#firstNumber').value;
+    let secondNumber = document.querySelector('#secondNumber').value;
+    const list = document.querySelector('#list');
 
-// outputDiv.innerHTML = `<h3>${result}</h3>`;
-// }).catch((error) => {
-//     console.log('Error with request:', error);
-//     alert('Something is wrong.')
-//    })
-// }
+    let mathToAdd = {
+        firstNumber: firstNumber,
+        secondNumber: secondNumber,
+        operator: selectedOperation
+    };
 
-// document.getElementById('additionButton').addEventListener('click', () => selectOperation('+'));
-// document.getElementById('subtractionButton').addEventListener('click', () => selectOperation('-'));
-// document.getElementById('multiplicationButton').addEventListener('click', () => selectOperation('X'));
-// document.getElementById('divisionButton').addEventListener('click', () => selectOperation('/'));
+    console.log('math I am adding:', mathToAdd);
+
+    axios.post('/calculator', mathToAdd).then((response) => {
+        console.log(response);
+        document.querySelector('#firstNumber') = '';
+        document.querySelector('#secondNumber') = '';
+
+        getCalculation();
+
+    }).catch((error) => {
+        console.log(error);
+        alert('Something exploded in submitFrom Post')
+    })
+};
 
 
 
-//clear the form function will go here
-
-
-//Maybe even a clear all function here?
