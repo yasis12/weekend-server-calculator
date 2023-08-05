@@ -5,8 +5,6 @@ let selectedOperation = '';
 function onSubmit(event) {
     //Submit the math to the server function
     submitMath()
-    //operator selector function
-    operator(event)
     //Clear the input function
     clearForm();
     // preform get request to show math history
@@ -16,7 +14,9 @@ function onSubmit(event) {
 
 // Function to handle button clicks and select operator
 function operator(event) {
+  // target the opperator value and set it = to this value
   const operatorValue = event.target.value;
+  //switch statement to select the chosen opperator
   switch (operatorValue) {
     case '+':
       selectedOperation = '+';
@@ -36,15 +36,15 @@ function operator(event) {
       break;
     default:
       console.log('Invalid operator');
-  }
-}
+  } // end switch statement
+} // end operator function
 
-// Add event listeners to each button
+// Add event listeners to each button so when they
 const additionButton = document.getElementById('additionButton');
 const subtractionButton = document.getElementById('subtractionButton');
 const multiplicationButton = document.getElementById('multiplicationButton');
 const divisionButton = document.getElementById('divisionButton');
-
+// when the button is clicked it will run the operator function
 additionButton.addEventListener('click', operator);
 subtractionButton.addEventListener('click', operator);
 multiplicationButton.addEventListener('click', operator);
@@ -54,7 +54,9 @@ divisionButton.addEventListener('click', operator);
 //Clear input function
 function clearForm() {
     console.log('Clearing the Inputs');
+    // clearing what operation was selected
     selectedOperation = '';
+    //clear out the input forms
     document.querySelector('#firstNumber').value = '';
     document.querySelector('#secondNumber').value = '';
 } // end clear inputs
@@ -63,19 +65,27 @@ function clearForm() {
 
 function calculatorResults() {
     console.log('inside get history');
-    //Call to GET calculator results
+    //Call to GET calculator results from the problemToSolve.js
     axios.get('/calculator').then((response) => {
-        console.log('Response from inside calculatorResults',response);
+        console.log('Response from inside calculatorResults',response.data);
+        //set the response data to = calculatorResults
         let calculatorResults = response.data;
-        let outputDiv = document.querySelector('#outputDiv');
-        let listDiv = document.querySelector('#listDiv');
-        outputDiv.innerHTML = `<h3>${calculatorResults.result}</h3>`
+        // target where we want the results and the history to be appended
+        let outputDiv = document.querySelector('#outputDiv'); // this is the result
+        let listDiv = document.querySelector('#listDiv'); // this is the history
+        // add result to the dom
+        // console.log('I expect the result of the math to be here', calculatorResults.result);
 
+        // outputDiv.innerHTML = `<h3>${calculation.result}</h3>`
+
+        // end result 
+
+        //add history to the dom
         listDiv.innerHTML = '';
-        
+        //loop through each one 
         for (const calculation of calculatorResults) {
             listDiv.innerHTML += `
-            <li>${calculation.firstNumber} ${calculation.operator} ${calculation.secondNumber}</li>
+            <li>${calculation.firstNumber} ${calculation.operator} ${calculation.secondNumber} = ${calculation.result}</li>
             `
           }
     }).catch((error) => {
@@ -88,23 +98,25 @@ function calculatorResults() {
 function submitMath() {
     console.log('Submit button was Clicked');
     event.preventDefault();
+    //setting these variables = to the # input in the form
     let firstNumber = document.querySelector('#firstNumber').value;
     let secondNumber = document.querySelector('#secondNumber').value;
     
+    // making sure that the form is not empty
     if (firstNumber === '' || secondNumber === '') {
         alert('Please input valid numbers');
     } else {
+      //if form is not empty package the variable into an object to send
     let resultToAdd = {
         firstNumber: firstNumber,
         secondNumber: secondNumber,
         selectedOperation: selectedOperation
     };
-    console.log('POST sending', resultToAdd);
+
+    console.log('POST sending to the server:', resultToAdd);
     //Make POST to send the object just created
     axios.post('/calculator', resultToAdd).then((response) => {
-                console.log('Back from server with response:',response);
-        
-                calculatorResults();
+                console.log('Back from server with response:', response);
         
             }).catch((error) => {
                 console.log(error);

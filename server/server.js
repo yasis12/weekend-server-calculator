@@ -24,14 +24,17 @@ app.get('/calculator', function(req, res){
 
 //POST
 app.post('/calculator', (req, res) => {
+    //post req from client setting up variables
     let firstNumber = req.body.firstNumber;
     let secondNumber = req.body.secondNumber;
     let selectedOperation = req.body.selectedOperation;
-    let result = 0;
+    let result = null; // result is null to begin
   
     // Perform the calculation based on the chosen operator
+    //using number to make sure the numbers we are passing are actually numbers
     if (selectedOperation === '+'){
       result = Number(firstNumber) + Number(secondNumber);
+      console.log('RESULT SERVER SIDE:', result);
     }
     else if ( selectedOperation === '-') {
       result = Number(firstNumber) - Number(secondNumber);
@@ -41,12 +44,9 @@ app.post('/calculator', (req, res) => {
     } 
     else if (selectedOperation === '/') {
       result = Number(firstNumber) / Number(secondNumber);
-    }
-    //sending result somewhere???
-    resultObject = {
-      result: result
-    }
-    res.send(resultObject);
+    } // end if statement
+    
+    //push result object into the result object array
 
     //packing up results into an object to send
     let problemToAdd = {
