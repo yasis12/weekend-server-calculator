@@ -1,9 +1,3 @@
-let problemToSolve = [
-    {firstNumber: '',
-    selectedOperation: '',
-    secondNumber: '',
-    result: ''
-    }
-  ];
+let problemToSolve = [];
   
   module.exports = problemToSolve;
